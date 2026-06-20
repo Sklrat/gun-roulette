@@ -6,8 +6,9 @@
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4vo22"]
 b = Vector2(1030, 0)
 
-[node name="Pistol" type="Node2D"]
+[node name="Pistol" type="Node2D" node_paths=PackedStringArray("collision_shape")]
 script = ExtResource("1_4vo22")
+collision_shape = NodePath("Area2D/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(18.950005, 13.5)
@@ -20,3 +21,6 @@ position = Vector2(18.950005, 21.5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(9.000004, -21.999998)
 shape = SubResource("SegmentShape2D_4vo22")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
