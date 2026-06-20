@@ -1,5 +1,26 @@
-[gd_scene format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=3 format=3 uid="uid://banu1sca1sxkv"]
+
+[ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scenes/node_2d.gd" id="1_4dvvg"]
+[ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="1_6e84v"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_4dvvg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="pistol" parent="." instance=ExtResource("1_6e84v")]
+
+[node name="spin" type="Button" parent="."]
+offset_left = -442.0
+offset_top = 158.0
+offset_right = -260.0
+offset_bottom = 258.0
+
+[node name="stop" type="Button" parent="."]
+offset_left = 306.0
+offset_top = 187.0
+offset_right = 430.0
+offset_bottom = 268.0
+
+[connection signal="pressed" from="spin" to="pistol" method="_on_spin_pressed"]
+[connection signal="pressed" from="stop" to="pistol" method="_on_stop_pressed"]
