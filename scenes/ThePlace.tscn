@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://banu1sca1sxkv"]
+
+[ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/ThePlace.gd" id="1_md85l"]
+[ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="2_tppfv"]
+[ext_resource type="PackedScene" uid="uid://bpr0bthwan2e5" path="res://cards/buttons/rotate_45r.tscn" id="3_us23g"]
+
+[node name="ThePlace" type="Node2D"]
+script = ExtResource("1_md85l")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.72, 0.72)
+
+[node name="pistol" parent="." instance=ExtResource("2_tppfv")]
+position = Vector2(0, -100)
+
+[node name="spin" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -48.0
+offset_top = -142.0
+offset_right = 49.0
+offset_bottom = -42.0
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 0)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 0)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 0)
+theme_override_colors/font_disabled_color = Color(0.88, 0.88, 0.88, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_focus_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
+theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
+
+[node name="stop" type="Button" parent="."]
+offset_left = 306.0
+offset_top = 187.0
+offset_right = 430.0
+offset_bottom = 268.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -184.0
+offset_right = 139.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="Rotate45R" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R2" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R3" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R4" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R5" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R6" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R7" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[connection signal="pressed" from="spin" to="pistol" method="_on_spin_pressed"]
+[connection signal="pressed" from="stop" to="pistol" method="_on_stop_pressed"]
