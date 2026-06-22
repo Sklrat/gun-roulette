@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/ThePlace.gd" id="1_md85l"]
 [ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="2_tppfv"]
 
-[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("gun", "card_hbox")]
+[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("gun", "card_hbox", "countdown_text")]
 script = ExtResource("1_md85l")
 gun = NodePath("pistol")
 card_hbox = NodePath("CanvasLayer/MarginContainer/HBoxContainer")
+countdown_text = NodePath("CanvasLayer/CountDown")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
@@ -62,6 +63,17 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
+
+[node name="CountDown" type="Label" parent="CanvasLayer"]
+offset_left = 682.0
+offset_top = -411.0
+offset_right = 754.0
+offset_bottom = -270.0
+theme_override_font_sizes/font_size = 50
+text = "
+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="spin" to="pistol" method="_on_spin_pressed"]
 [connection signal="pressed" from="stop" to="pistol" method="_on_stop_pressed"]

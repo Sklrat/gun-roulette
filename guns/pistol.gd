@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var collision_shape: CollisionShape2D
+@export var animation_player: AnimationPlayer
 
 var main_scene
 
@@ -28,8 +29,7 @@ func _process(delta: float) -> void:
 		spin(delta)
 	elif stop_spinning:
 		stopspin(delta)
-	elif main_scene.game_state == "counting_down":
-		start_countdown(delta)
+
 	elif main_scene.game_state == "rotation_card": #this is for when the rotation card is played
 		rotate_angle(rotation_target)
 		
@@ -49,7 +49,7 @@ func stopspin(delta: float) -> void:
 	else:
 		speed = 0
 		stop_spinning = false
-		main_scene.game_state = "counting_down"
+		main_scene.start_countdown()
 		
 	rotation += speed * delta
 	
@@ -61,7 +61,11 @@ func start_countdown(delta:float) -> void:
 	#print(countdown_timer)
 	
 func shoot() -> void:
-	collision_shape.disabled = false
+	animation_player.play("shoot")
+	await animation_player.animation_finished
+	main_scene.game_state = "idle"
+	#collision_shape.disabled = false
+	
 
 var rotation_progress = 0
 var rotation_speed = 2
