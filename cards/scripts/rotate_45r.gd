@@ -7,7 +7,7 @@ func _ready():
 
 	
 func _on_pressed() -> void:
-	super._destory_card()
+	super()
 	
 func _on_state_changed(state: String) -> void:
 	if state == "counting_down":

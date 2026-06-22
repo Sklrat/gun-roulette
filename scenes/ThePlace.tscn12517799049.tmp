@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=4 format=3 uid="uid://banu1sca1sxkv"]
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/ThePlace.gd" id="1_md85l"]
 [ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="2_tppfv"]
+[ext_resource type="PackedScene" uid="uid://bpr0bthwan2e5" path="res://cards/buttons/rotate_45r.tscn" id="3_us23g"]
 
 [node name="ThePlace" type="Node2D" node_paths=PackedStringArray("gun", "card_hbox")]
 script = ExtResource("1_md85l")
@@ -62,6 +63,27 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
+
+[node name="Rotate45R" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R2" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R3" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R4" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R5" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R6" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
+
+[node name="Rotate45R7" parent="CanvasLayer/MarginContainer/HBoxContainer" instance=ExtResource("3_us23g")]
+layout_mode = 2
 
 [connection signal="pressed" from="spin" to="pistol" method="_on_spin_pressed"]
 [connection signal="pressed" from="stop" to="pistol" method="_on_stop_pressed"]

@@ -2,12 +2,16 @@
 extends TextureButton
 class_name Card
 
+@export var action_type: String
+@export var value: float
+
 var main_scene
 
 var normal_color = Color(0.9,0.9,0.9)
 var hover_color = Color(1,1,1)
 var disabled_color = Color(0.5, 0.5, 0.5)
 
+signal card_pressed(action_type, value)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,11 +22,10 @@ func _ready() -> void:
 		
 	_on_state_changed(main_scene.game_state)
 	
-@abstract
-func _on_state_changed(state: String)
 
-func _destory_card() -> void:
+func destory_card() -> void:
 	self.queue_free()
+	
 
 func _disable() -> void:
 	self.disabled = true
@@ -31,6 +34,13 @@ func _disable() -> void:
 func _enable() -> void:
 	self.disabled = false
 	self_modulate = normal_color
+	
+@abstract
+func _on_state_changed(state: String)
+
+func _on_pressed() -> void:
+	card_pressed.emit(action_type, value)
+	destory_card()
 	
 #UI color changes
 func _on_mouse_entered() -> void:

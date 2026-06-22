@@ -1,6 +1,9 @@
 extends Node2D
 
 @export var entity = preload("res://entitys/enemy.tscn")
+@export var gun: Node2D
+@export var card_hbox: HBoxContainer
+@export var card = preload("res://cards/buttons/rotate_45r.tscn")
 
 var round: int = 0
 var enemys_killed: int = 0
@@ -21,6 +24,7 @@ signal state_changed(game_state)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	spawn_entitys(5)
+	give_random_card(1)
 
 func spawn_entitys(amount: int) -> void: #swpan entitys, amount EXCLUES player entity
 	for i in amount:
@@ -47,7 +51,14 @@ func get_spawn_point() -> Vector2:
 			
 	return Vector2.ZERO
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func give_random_card(amount: int) -> void:
+	for i in amount:
+		var card = card.instantiate()
+		card.card_pressed.connect(_on_card_pressed)
+		card_hbox.add_child(card)
+		
+## handle card stuff
+func _on_card_pressed (action: String, amount: int) -> void:
+	if action == "rotate":
+		gun.set_rotate_angle(amount)
+		

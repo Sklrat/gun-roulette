@@ -9,6 +9,8 @@ offset_bottom = 118.0
 texture_normal = ExtResource("1_ymmpi")
 stretch_mode = 4
 script = ExtResource("2_frgd6")
+action_type = "rotate"
+value = 45.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

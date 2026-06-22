@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var collision_shape: CollisionShape2D
+
 var main_scene
 
 var damage: int = 1
@@ -18,15 +19,19 @@ var countdown_timer: float = 5
 func _ready() -> void:
 	main_scene = get_parent()
 	collision_shape.disabled = true
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	#game states
 	if spinning:
 		spin(delta)
 	elif stop_spinning:
 		stopspin(delta)
 	elif main_scene.game_state == "counting_down":
 		start_countdown(delta)
+	elif main_scene.game_state == "rotation_card": #this is for when the rotation card is played
+		rotate_angle(rotation_target)
 		
 func spin(delta: float) -> void:
 	if speed < max_speed:
@@ -57,7 +62,34 @@ func start_countdown(delta:float) -> void:
 	
 func shoot() -> void:
 	collision_shape.disabled = false
-	
+
+var rotation_progress = 0
+var rotation_speed = 2
+var rotation_target
+
+## rotation card function
+func rotate_angle(rotation_target: int) -> void: #in degrees
+	if rotation_target > 0:
+		rotation_degrees += rotation_speed
+		rotation_progress += rotation_speed
+		if rotation_progress >= rotation_target:
+			main_scene.game_state = "counting_down"
+			rotation_progress = 0
+	if rotation_target < 0:
+		rotation_degrees -= rotation_speed
+		rotation_progress -= rotation_speed
+		if rotation_progress <= rotation_target:
+			main_scene.game_state = "counting_down"
+			rotation_progress = 0
+			
+
+func set_rotate_angle(degrees: float) -> void:
+	main_scene.game_state = "rotation_card" 
+	#rotation_target = rotation_degrees + degrees
+	rotation_target = degrees
+
+
+# godot signals
 func _on_spin_pressed() -> void:
 	if main_scene.game_state == "idle":
 		spinning = true
@@ -69,7 +101,6 @@ func _on_spin_pressed() -> void:
 func _on_stop_pressed() -> void:
 	spinning = false
 	stop_spinning = true
-
 
 #makes eneity take damage
 func _on_area_2d_area_entered(area: Area2D) -> void:
