@@ -1,14 +1,19 @@
 extends Node2D
 
-@export var entity = preload("res://entitys/enemy.tscn")
 @export var gun_scene = preload("res://guns/Pistol.tscn")
+@export var player_scene = preload("res://entitys/player.tscn")
 @export var card_hbox: HBoxContainer
 @export var countdown_text: Label
 @export var round_text: Label
+@export var rounds: Array[RoundData] = []
 var card_folder = "res://cards/buttons/"
-var gun
 var card_files: Array[String] = []
 var rotation_card_files: Array[String] = []
+var gun
+
+var player: Node2D
+var player_lives: int = 3
+
 
 var round: int = 1
 var enemys_killed: int = 0
@@ -21,6 +26,7 @@ var game_state: String = "idle":
 		state_changed.emit(game_state)
 
 var entity_positions: Array[Vector2] = []
+var entitys: Array[Node2D] = []
 var enemys_left: int = 0
 var min_distance: float  = 200
 var center = Vector2(0, -100)
@@ -33,14 +39,41 @@ signal state_changed(game_state)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_cards()
-	spawn_entitys(3)
 	spawn_gun()
-	give_random_card(8)
+	start_round()
+	give_random_card(5)
 
 func _process(delta: float) -> void:
 	if game_state == "counting_down":
 		countdown(delta)
 		
+func start_round() -> void:
+	var current_round_data = rounds[round - 1]
+	entity_positions.clear()
+	spawn_player()
+	for entity in current_round_data.entitys_to_spawn:
+		var live_entity = spawn_entity(entity)
+		if live_entity.has_signal("enemy_died"):
+			live_entity.enemy_died.connect(_on_enemy_died)
+	give_random_card(3)
+	round_text.text = "Round: " + str(round)
+		
+func spawn_entity(entity_scene: PackedScene) -> Node2D:
+		var entity = entity_scene.instantiate()
+		entity.global_position = get_spawn_point()
+		add_child(entity)
+		entitys.append(entity)
+		if entity.is_enemy:
+			enemys_left += 1
+		return entity
+			
+func spawn_player() -> void:
+		player = player_scene.instantiate()
+		player.lives = player_lives
+		player.global_position = get_spawn_point()
+		add_child(player)
+		player.player_damaged.connect(_on_player_damaged)
+			
 func spawn_gun() -> void:
 	gun = gun_scene.instantiate()
 	gun.global_position = center
@@ -50,13 +83,6 @@ func spawn_gun() -> void:
 	await gun_animation_player.animation_finished
 	game_state = "idle"
 	
-func spawn_entitys(amount: int) -> void: #swpan entitys, amount EXCLUES player entity
-	for i in amount:
-		var enemy = entity.instantiate()
-		enemy.global_position = get_spawn_point()
-		add_child(enemy)
-	enemys_left = amount
-		
 func get_spawn_point() -> Vector2:
 	while true:
 		var angle = randf() * TAU
@@ -106,6 +132,14 @@ func load_cards() -> void:
 		
 	card_dir.list_dir_end()
 		
+func _on_player_damaged(amount: int) -> void:
+	player_lives -= amount
+	
+func _on_enemy_died() -> void:
+	enemys_left -= 1
+	if enemys_left <= 0:
+		round += 1
+	
 func start_countdown() -> void:
 	countdown_timer = 5
 	game_state = "counting_down"

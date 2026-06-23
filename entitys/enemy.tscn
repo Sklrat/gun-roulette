@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxodmmo626fmb"]
 
-[ext_resource type="Texture2D" uid="uid://ok0kwylu2gmi" path="res://sprites/icon.svg" id="1_7gf71"]
 [ext_resource type="Script" uid="uid://bdw4v0x7a6rjp" path="res://entitys/entity.gd" id="1_qaasr"]
+[ext_resource type="Texture2D" uid="uid://beypxr0m6svbe" path="res://sprites/entitys/enemy.png" id="2_qaasr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qaasr"]
 radius = 55.145264
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_qaasr")
+lives = 1
+is_enemy = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7gf71")
+texture = ExtResource("2_qaasr")
 
 [node name="Area2D" type="Area2D" parent="."]
 

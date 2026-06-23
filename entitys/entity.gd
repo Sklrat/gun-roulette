@@ -1,12 +1,13 @@
 extends Node2D
 class_name Entity
 
-@export var heart_scene = preload("res://scenes/Heart.tscn")
+var heart_scene = preload("res://scenes/Heart.tscn")
 var main_scene
 
-var lives: int = 3
-var heart_nodes: Array[Sprite2D]
+@export var lives: int = 3
+@export var is_enemy: bool
 
+var heart_nodes: Array[Sprite2D]
 var heart_spacing_x: float = 30
 var heart_spacing_y: float = 70
 
@@ -26,6 +27,10 @@ func loose_lives(amount: int) -> void:
 func die() -> void:
 	main_scene.enemys_left -= 1
 	self.queue_free()
+	if is_enemy:
+		enemy_died.emit()
+	
+signal enemy_died()
 	
 
 # Called when the node enters the scene tree for the first time.
