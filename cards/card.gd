@@ -1,9 +1,9 @@
-@abstract
 extends TextureButton
 class_name Card
 
 @export var action_type: String
 @export var value: float
+@export var active_states: Array[String] 
 
 var main_scene
 
@@ -35,8 +35,11 @@ func _enable() -> void:
 	self.disabled = false
 	self_modulate = normal_color
 	
-@abstract
-func _on_state_changed(state: String)
+func _on_state_changed(state: String) ->void:
+	if active_states.has(state) or active_states.has("all"):
+		_enable()
+	else:
+		_disable()
 
 func _on_pressed() -> void:
 	card_pressed.emit(action_type, value)

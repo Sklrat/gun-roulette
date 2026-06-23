@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjx4clv3gs8r"]
+
+[ext_resource type="Texture2D" uid="uid://c8vj72l3t8eo0" path="res://sprites/cards-resized/2x_bullet.png" id="1_q8s6t"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_jt3j7"]
+
+[node name="2xDamage" type="TextureButton"]
+offset_right = 84.0
+offset_bottom = 118.0
+texture_normal = ExtResource("1_q8s6t")
+stretch_mode = 4
+script = ExtResource("2_jt3j7")
+action_type = "multiply_damage"
+value = 2.0
+active_states = Array[String](["counting_down"])
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

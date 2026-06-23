@@ -1,19 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=2 format=3 uid="uid://banu1sca1sxkv"]
 
-[ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/ThePlace.gd" id="1_md85l"]
-[ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="2_tppfv"]
+[ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 
-[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("gun", "card_hbox", "countdown_text")]
+[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text")]
 script = ExtResource("1_md85l")
-gun = NodePath("pistol")
 card_hbox = NodePath("CanvasLayer/MarginContainer/HBoxContainer")
 countdown_text = NodePath("CanvasLayer/CountDown")
+round_text = NodePath("CanvasLayer/Round")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
-
-[node name="pistol" parent="." instance=ExtResource("2_tppfv")]
-position = Vector2(0, -100)
 
 [node name="spin" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -35,12 +31,6 @@ theme_override_colors/icon_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
-
-[node name="stop" type="Button" parent="."]
-offset_left = 306.0
-offset_top = 187.0
-offset_right = 430.0
-offset_bottom = 268.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -65,15 +55,23 @@ size_flags_vertical = 4
 theme_override_constants/separation = 20
 
 [node name="CountDown" type="Label" parent="CanvasLayer"]
-offset_left = 682.0
-offset_top = -411.0
-offset_right = 754.0
-offset_bottom = -270.0
+offset_left = 1028.0
+offset_top = 26.0
+offset_right = 1106.0
+offset_bottom = 167.0
 theme_override_font_sizes/font_size = 50
-text = "
+text = "0.0
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="spin" to="pistol" method="_on_spin_pressed"]
-[connection signal="pressed" from="stop" to="pistol" method="_on_stop_pressed"]
+[node name="Round" type="Label" parent="CanvasLayer"]
+offset_left = 44.0
+offset_top = 26.0
+offset_right = 257.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 50
+text = "Round: 1"
+vertical_alignment = 1
+
+[connection signal="pressed" from="spin" to="." method="_on_spin_pressed"]

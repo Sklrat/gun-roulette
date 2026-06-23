@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://deexkd3njnfty"]
+
+[ext_resource type="Texture2D" uid="uid://begxfonc3a6sy" path="res://sprites/cards-resized/slow.png" id="1_dgjmk"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_ox4ro"]
+
+[node name="Slow" type="TextureButton"]
+offset_right = 84.0
+offset_bottom = 118.0
+texture_normal = ExtResource("1_dgjmk")
+stretch_mode = 4
+script = ExtResource("2_ox4ro")
+action_type = "slow_gun"
+value = 0.5
+active_states = Array[String](["spinning"])
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

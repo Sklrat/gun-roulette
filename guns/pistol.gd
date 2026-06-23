@@ -2,12 +2,13 @@ extends Node2D
 
 @export var collision_shape: CollisionShape2D
 @export var animation_player: AnimationPlayer
+@export var line2D : Line2D
 
 var main_scene
 
 var damage: int = 1
 
-var acceleration: float = 0.1
+var acceleration: float = 0.2
 var speed: float = 0
 var max_speed: float = 10
 
@@ -60,10 +61,25 @@ func start_countdown(delta:float) -> void:
 		shoot()
 	#print(countdown_timer)
 	
+	#ight now this function shoots > deswpans, and spwans a new gun
 func shoot() -> void:
+	main_scene.game_state = "shooting"
+	line2D.visible = false
 	animation_player.play("shoot")
 	await animation_player.animation_finished
-	main_scene.game_state = "idle"
+	await get_tree().create_timer(1.0).timeout
+	
+	
+	animation_player.play("despawn")
+	await animation_player.animation_finished
+	self.queue_free()
+	
+	main_scene.missed_in_row += 1
+	if main_scene.missed_in_row >= 3:
+		main_scene.give_random_rotation_card()
+		main_scene.missed_in_row = 0
+		
+	main_scene.spawn_gun()
 	#collision_shape.disabled = false
 	
 
@@ -110,3 +126,4 @@ func _on_stop_pressed() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_parent().has_method("loose_lives"):
 		area.get_parent().loose_lives(damage)
+		main_scene.missed_in_row = 0

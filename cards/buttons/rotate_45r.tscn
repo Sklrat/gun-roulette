@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bpr0bthwan2e5"]
 
 [ext_resource type="Texture2D" uid="uid://iiktsk6djj0l" path="res://sprites/cards-resized/45r.png" id="1_ymmpi"]
-[ext_resource type="Script" uid="uid://cu4bgfslat83l" path="res://cards/scripts/rotate_45r.gd" id="2_frgd6"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_frgd6"]
 
 [node name="Rotate45R" type="TextureButton"]
 offset_right = 84.0
@@ -11,6 +11,7 @@ stretch_mode = 4
 script = ExtResource("2_frgd6")
 action_type = "rotate"
 value = 45.0
+active_states = Array[String](["counting_down"])
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

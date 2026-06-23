@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://gulu0ct6oqnc"]
+
+[ext_resource type="Texture2D" uid="uid://cukkbs35vyl67" path="res://sprites/cards-resized/stop.png" id="1_kxeat"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_6262v"]
+
+[node name="Slow" type="TextureButton"]
+offset_right = 84.0
+offset_bottom = 118.0
+texture_normal = ExtResource("1_kxeat")
+stretch_mode = 4
+script = ExtResource("2_6262v")
+action_type = "stop_gun"
+active_states = Array[String](["spinning"])
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

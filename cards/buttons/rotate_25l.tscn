@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://blx7knm74t0fw"]
+
+[ext_resource type="Texture2D" uid="uid://nay5iuuab5j3" path="res://sprites/cards-resized/25l.png" id="1_h6d6v"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_hacc8"]
+
+[node name="Rotate25L" type="TextureButton"]
+offset_right = 84.0
+offset_bottom = 118.0
+texture_normal = ExtResource("1_h6d6v")
+stretch_mode = 4
+script = ExtResource("2_hacc8")
+action_type = "rotate"
+value = -25.0
+active_states = Array[String](["counting_down"])
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

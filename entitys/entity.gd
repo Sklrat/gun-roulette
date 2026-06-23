@@ -1,8 +1,10 @@
 extends Node2D
+class_name Entity
 
 @export var heart_scene = preload("res://scenes/Heart.tscn")
+var main_scene
 
-var lives: int = 1
+var lives: int = 3
 var heart_nodes: Array[Sprite2D]
 
 var heart_spacing_x: float = 30
@@ -14,7 +16,7 @@ func loose_lives(amount: int) -> void:
 		var heart_animation_player = heart.get_node("AnimationPlayer")
 		heart_animation_player.play("loose_life")
 		await heart_animation_player.animation_finished
-		lives - 1
+		lives -= 1
 		heart_nodes.erase(heart)
 		heart.queue_free()
 		
@@ -22,12 +24,13 @@ func loose_lives(amount: int) -> void:
 			die()
 			
 func die() -> void:
-	#also remove self from main game array
+	main_scene.enemys_left -= 1
 	self.queue_free()
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	main_scene = get_parent()
 	#generating hearts
 	var start_placement = -((lives - 1) * heart_spacing_x / 2)
 	for i in lives:
