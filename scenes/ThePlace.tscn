@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="2_md85l"]
-[ext_resource type="Resource" uid="uid://b5vqyeeytifax" path="res://rounds/round_2.tres" id="3_md85l"]
+[ext_resource type="Resource" uid="uid://bo4h52hv8qxrk" path="res://rounds/round_1.tres" id="3_tppfv"]
 
 [node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text")]
 script = ExtResource("1_md85l")
 card_hbox = NodePath("CanvasLayer/MarginContainer/HBoxContainer")
 countdown_text = NodePath("CanvasLayer/CountDown")
 round_text = NodePath("CanvasLayer/Round")
-rounds = Array[ExtResource("2_md85l")]([ExtResource("3_md85l"), ExtResource("3_md85l")])
+rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("3_tppfv"), ExtResource("3_tppfv")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)

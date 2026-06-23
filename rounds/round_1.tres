@@ -5,5 +5,5 @@
 
 [resource]
 script = ExtResource("1_urhca")
-entitys_to_spawn = Array[PackedScene]([ExtResource("1_l00ku"), ExtResource("1_l00ku")])
+entitys_to_spawn = Array[PackedScene]([ExtResource("1_l00ku")])
 metadata/_custom_type_script = "uid://d1mb5fl8tk8oe"

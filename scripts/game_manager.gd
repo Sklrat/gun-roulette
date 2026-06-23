@@ -48,7 +48,13 @@ func _process(delta: float) -> void:
 		countdown(delta)
 		
 func start_round() -> void:
+	print("round:" + str(round))
 	var current_round_data = rounds[round - 1]
+	for entity in entitys:
+		entitys.pop_front()
+		remove_child(entity)
+		entity.queue_free()
+		print(entity)
 	entity_positions.clear()
 	spawn_player()
 	for entity in current_round_data.entitys_to_spawn:
@@ -72,6 +78,7 @@ func spawn_player() -> void:
 		player.lives = player_lives
 		player.global_position = get_spawn_point()
 		add_child(player)
+		entitys.append(player)
 		player.player_damaged.connect(_on_player_damaged)
 			
 func spawn_gun() -> void:
@@ -139,6 +146,7 @@ func _on_enemy_died() -> void:
 	enemys_left -= 1
 	if enemys_left <= 0:
 		round += 1
+		start_round()
 	
 func start_countdown() -> void:
 	countdown_timer = 5
