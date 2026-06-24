@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bq6chnionckl8"]
+
+[ext_resource type="FontFile" uid="uid://br4d4o6pvhiwd" path="res://theme/fonts/BebasNeue-Regular.otf" id="1_8ab6e"]
+
+[resource]
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("1_8ab6e")
+Label/font_sizes/font_size = 30
+Label/fonts/font = ExtResource("1_8ab6e")

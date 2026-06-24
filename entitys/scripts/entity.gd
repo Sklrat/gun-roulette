@@ -2,6 +2,7 @@ extends Node2D
 class_name Entity
 
 var heart_scene = preload("res://scenes/Heart.tscn")
+@export var animation_player: AnimationPlayer
 var main_scene
 
 @export var lives: int = 3
@@ -26,6 +27,9 @@ func loose_lives(amount: int) -> void:
 			
 func die() -> void:
 	main_scene.enemys_left -= 1
+	if animation_player != null:
+		animation_player.play("die")
+		await animation_player.animation_finished
 	self.queue_free()
 	if is_enemy:
 		enemy_died.emit()

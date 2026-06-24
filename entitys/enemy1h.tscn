@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyqcdbae5mjmr"]
+[gd_scene load_steps=9 format=3 uid="uid://bxodmmo626fmb"]
 
-[ext_resource type="Script" uid="uid://d4aubgpjm2rdk" path="res://entitys/scripts/player.gd" id="1_hbkvy"]
-[ext_resource type="Texture2D" uid="uid://cmbm8arcjxrlp" path="res://sprites/entitys/player.png" id="2_ebhgt"]
-[ext_resource type="AudioStream" uid="uid://5jjchfrv23qh" path="res://sfx/disappear.mp3" id="3_punbo"]
+[ext_resource type="Script" uid="uid://bdw4v0x7a6rjp" path="res://entitys/scripts/entity.gd" id="1_qaasr"]
+[ext_resource type="Texture2D" uid="uid://beypxr0m6svbe" path="res://sprites/entitys/enemy.png" id="2_qaasr"]
+[ext_resource type="AudioStream" uid="uid://5jjchfrv23qh" path="res://sfx/disappear.mp3" id="3_wvd63"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qaasr"]
 radius = 55.145264
@@ -95,12 +95,14 @@ _data = {
 &"spawn": SubResource("Animation_wvd63")
 }
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("1_hbkvy")
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("animation_player") groups=["enimies"]]
+script = ExtResource("1_qaasr")
 animation_player = NodePath("AnimationPlayer")
+lives = 1
+is_enemy = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ebhgt")
+texture = ExtResource("2_qaasr")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -113,15 +115,4 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_punbo")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -19.0
-offset_top = -124.0
-offset_right = 21.0
-offset_bottom = -65.0
-theme_override_font_sizes/font_size = 20
-text = "You
-v"
-horizontal_alignment = 1
-vertical_alignment = 1
+stream = ExtResource("3_wvd63")

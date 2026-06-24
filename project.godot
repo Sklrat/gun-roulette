@@ -19,6 +19,10 @@ config/icon="res://sprites/icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom="uid://bq6chnionckl8"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

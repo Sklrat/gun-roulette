@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="RoundData" load_steps=3 format=3 uid="uid://bo4h52hv8qxrk"]
 
-[ext_resource type="PackedScene" uid="uid://bxodmmo626fmb" path="res://entitys/enemy.tscn" id="1_l00ku"]
+[ext_resource type="PackedScene" uid="uid://bxodmmo626fmb" path="res://entitys/enemy1h.tscn" id="1_l00ku"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="1_urhca"]
 
 [resource]

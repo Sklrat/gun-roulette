@@ -5,6 +5,7 @@ extends Node2D
 @export var card_hbox: HBoxContainer
 @export var countdown_text: Label
 @export var round_text: Label
+@export var enemys_left_text: Label
 @export var rounds: Array[RoundData] = []
 var card_folder = "res://cards/buttons/"
 var card_files: Array[String] = []
@@ -13,7 +14,6 @@ var gun
 
 var player: Node2D
 var player_lives: int = 3
-
 
 var round: int = 1
 var enemys_killed: int = 0
@@ -42,6 +42,12 @@ func _ready() -> void:
 	spawn_gun()
 	start_round()
 	give_random_card(5)
+	var test: Array = ["a", "b", "c"]
+	for i in test:
+		print(i)
+		test.pop_back()
+		print(i)
+	print(test)
 
 func _process(delta: float) -> void:
 	if game_state == "counting_down":
@@ -50,12 +56,16 @@ func _process(delta: float) -> void:
 func start_round() -> void:
 	print("round:" + str(round))
 	var current_round_data = rounds[round - 1]
+	#clear the scene
 	for entity in entitys:
-		entitys.pop_front()
 		remove_child(entity)
 		entity.queue_free()
 		print(entity)
+	entitys.clear()
+		
+	enemys_left = 0
 	entity_positions.clear()
+	#span player and entitys
 	spawn_player()
 	for entity in current_round_data.entitys_to_spawn:
 		var live_entity = spawn_entity(entity)
@@ -63,13 +73,14 @@ func start_round() -> void:
 			live_entity.enemy_died.connect(_on_enemy_died)
 	give_random_card(3)
 	round_text.text = "Round: " + str(round)
+	enemys_left_text.text = "Enemys left: " + str(enemys_left)
 		
 func spawn_entity(entity_scene: PackedScene) -> Node2D:
 		var entity = entity_scene.instantiate()
 		entity.global_position = get_spawn_point()
 		add_child(entity)
 		entitys.append(entity)
-		if entity.is_enemy:
+		if entity.is_in_group("enimies"):
 			enemys_left += 1
 		return entity
 			
@@ -144,6 +155,7 @@ func _on_player_damaged(amount: int) -> void:
 	
 func _on_enemy_died() -> void:
 	enemys_left -= 1
+	enemys_left_text.text = "Enemys left: " + str(enemys_left)
 	if enemys_left <= 0:
 		round += 1
 		start_round()
