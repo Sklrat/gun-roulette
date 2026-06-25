@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfi38g1oau5oh"]
+[gd_scene load_steps=10 format=3 uid="uid://bfi38g1oau5oh"]
 
 [ext_resource type="Script" uid="uid://cebiky2fdh72r" path="res://scripts/main_menu.gd" id="1_2wh52"]
 [ext_resource type="Texture2D" uid="uid://dqq1cx6r50lk2" path="res://sprites/main menu dim.png" id="2_ow34m"]
 [ext_resource type="Texture2D" uid="uid://b245xfh66m400" path="res://sprites/main menu lighted.png" id="3_l72w3"]
 [ext_resource type="FontFile" uid="uid://so5tv7370hi3" path="res://theme/fonts/Broken-Detroit - PERSONAL USE ONLY.ttf" id="4_ow34m"]
+[ext_resource type="PackedScene" uid="uid://bcv3q1t7bqcj5" path="res://scenes/full_screen_button.tscn" id="5_l72w3"]
 
 [sub_resource type="Gradient" id="Gradient_ow34m"]
 offsets = PackedFloat32Array(0, 0.22543353, 0.6763006)
@@ -53,6 +54,12 @@ offset_right = 474.0
 offset_bottom = 477.0
 theme_override_font_sizes/font_size = 50
 text = "Play"
+
+[node name="CheckButton" parent="CanvasLayer" instance=ExtResource("5_l72w3")]
+offset_left = 1020.0
+offset_top = 612.0
+offset_right = 1147.0
+offset_bottom = 644.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = SubResource("NoiseTexture2D_ow34m")

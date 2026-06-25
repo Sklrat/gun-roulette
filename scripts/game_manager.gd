@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var gun_scene = preload("res://guns/Pistol.tscn")
+@export var gun_scene = preload("res://guns/shot_gun.tscn")
 @export var player_scene = preload("res://entitys/player.tscn")
 @export var card_hbox: HBoxContainer
 @export var countdown_text: Label
@@ -13,6 +13,8 @@ extends Node2D
 var card_folder = "res://cards/buttons/"
 var card_files: Array[String] = []
 var rotation_card_files: Array[String] = []
+@export var card_scenes: Array[PackedScene] = []
+@export var rotation_card_scenes: Array[PackedScene] = []
 var gun
 
 var player: Node2D
@@ -34,7 +36,7 @@ var entitys: Array[Node2D] = []
 var enemys_left: int = 0
 var min_distance: float  = 200
 var center = Vector2(0, -100)
-var radius: float = 200
+@export var radius: float = 200
 
 @export var countdown_length: float = 5
 var countdown_timer: float = 0
@@ -43,7 +45,7 @@ signal state_changed(game_state)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_cards()
+	#load_cards()
 	spawn_gun()
 	start_round()
 	give_random_card(5)
@@ -129,17 +131,19 @@ func get_spawn_point() -> Vector2:
 
 func give_random_card(amount: int) -> void:
 	for i in amount:
-		var random_card = card_files[randi_range(0,card_files.size() - 1)]
-		var full_path = card_folder + random_card
-		var card_scene = load(str(full_path))
+		#var random_card = card_files[randi_range(0,card_files.size() - 1)]
+		#var full_path = card_folder + random_card
+		#var card_scene = load(str(full_path))
+		var card_scene = card_scenes[randi_range(0,card_scenes.size() - 1)]
 		var card = card_scene.instantiate()
 		card.card_pressed.connect(_on_card_pressed)
 		card_hbox.add_child(card)
 		
 func give_random_rotation_card() -> void:
-	var random_card = rotation_card_files[randi_range(0,rotation_card_files.size() - 1)]
-	var full_path = card_folder + random_card
-	var card_scene = load(str(full_path))
+	#var random_card = rotation_card_files[randi_range(0,rotation_card_files.size() - 1)]
+	#var full_path = card_folder + random_card
+	#var card_scene = load(str(full_path))
+	var card_scene = rotation_card_scenes[randi_range(0,card_scenes.size() - 1)]
 	var card = card_scene.instantiate()
 	card.card_pressed.connect(_on_card_pressed)
 	card_hbox.add_child(card)
@@ -180,7 +184,7 @@ func _on_enemy_died() -> void:
 func start_countdown() -> void:
 	countdown_timer = countdown_length
 	game_state = "counting_down"
-	gun.line2D.visible = true
+	gun.animation_player.play("line_visible")
 	
 func countdown(delta:float) -> void:
 	countdown_timer -= delta

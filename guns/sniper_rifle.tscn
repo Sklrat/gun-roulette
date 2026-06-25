@@ -1,11 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnmtrav2vvbv3"]
+[gd_scene load_steps=14 format=3 uid="uid://c6fkm7my1pq7m"]
 
-[ext_resource type="Script" uid="uid://cou3n3xaddcw8" path="res://guns/pistol.gd" id="1_4vo22"]
-[ext_resource type="Texture2D" uid="uid://d0hvvjytvjkkg" path="res://sprites/guns/pistol.png" id="2_juem0"]
-[ext_resource type="Texture2D" uid="uid://ch5r2j7y5b8dd" path="res://sprites/bang.png" id="3_gi72s"]
-[ext_resource type="AudioStream" uid="uid://b1s05jcjym35f" path="res://sfx/gunshot.mp3" id="4_7qm2q"]
-[ext_resource type="AudioStream" uid="uid://cjs17mcntd70u" path="res://sfx/despawn.mp3" id="5_juem0"]
-[ext_resource type="AudioStream" uid="uid://dmtncrk8stm5b" path="res://sfx/gun_spawn.mp3" id="6_3hshm"]
+[ext_resource type="Script" uid="uid://cou3n3xaddcw8" path="res://guns/pistol.gd" id="1_mxjpj"]
+[ext_resource type="Texture2D" uid="uid://8yb34068al7e" path="res://sprites/guns/sniper rifle.png" id="2_mxjpj"]
+[ext_resource type="Texture2D" uid="uid://ch5r2j7y5b8dd" path="res://sprites/bang.png" id="3_epcq8"]
+[ext_resource type="AudioStream" uid="uid://b1s05jcjym35f" path="res://sfx/gunshot.mp3" id="4_xqayh"]
+[ext_resource type="AudioStream" uid="uid://cjs17mcntd70u" path="res://sfx/despawn.mp3" id="5_oklbs"]
+[ext_resource type="AudioStream" uid="uid://dmtncrk8stm5b" path="res://sfx/gun_spawn.mp3" id="6_r1qc1"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_4vo22"]
 b = Vector2(1030, 0)
@@ -82,7 +82,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_7qm2q")]
+"values": [ExtResource("4_xqayh")]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -181,7 +181,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("5_juem0")]
+"values": [ExtResource("5_oklbs")]
 }
 
 [sub_resource type="Animation" id="Animation_juem0"]
@@ -244,7 +244,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_7qm2q")]
+"values": [ExtResource("4_xqayh")]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -295,7 +295,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_3hshm")]
+"values": [ExtResource("6_r1qc1")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -322,7 +322,7 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_kklqo"]
+[sub_resource type="Animation" id="Animation_mxjpj"]
 resource_name = "line_visible"
 length = 0.1
 tracks/0/type = "value"
@@ -342,16 +342,17 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_3hshm"),
 &"despawn": SubResource("Animation_ip2wa"),
-&"line_visible": SubResource("Animation_kklqo"),
+&"line_visible": SubResource("Animation_mxjpj"),
 &"shoot": SubResource("Animation_juem0"),
 &"spawn": SubResource("Animation_hg37e")
 }
 
-[node name="Pistol" type="Node2D" node_paths=PackedStringArray("collision_shape", "animation_player", "line2D")]
-script = ExtResource("1_4vo22")
+[node name="SniperRifle" type="Node2D" node_paths=PackedStringArray("collision_shape", "animation_player")]
+script = ExtResource("1_mxjpj")
 collision_shape = NodePath("Area2D/CollisionShape2D")
 animation_player = NodePath("AudioStreamPlayer2D/AnimationPlayer")
-line2D = NodePath("Line2D")
+max_speed = 7.0
+acceleration = 7.0
 
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
@@ -363,13 +364,14 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="Gun" type="Sprite2D" parent="."]
 position = Vector2(18.950005, 13.5)
-texture = ExtResource("2_juem0")
-offset = Vector2(26.645, 2.24)
+texture = ExtResource("2_mxjpj")
+offset = Vector2(-0.465, -9.675)
 
 [node name="Bang" type="Sprite2D" parent="Gun"]
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(75.5191, -15.759233)
-texture = ExtResource("3_gi72s")
+position = Vector2(139.10356, -13.5)
+scale = Vector2(0.6411713, 0.6411713)
+texture = ExtResource("3_epcq8")
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(18.950005, 21.5)
@@ -379,7 +381,7 @@ position = Vector2(9.000004, -21.999998)
 shape = SubResource("SegmentShape2D_4vo22")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_7qm2q")
+stream = ExtResource("4_xqayh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AudioStreamPlayer2D"]
 root_node = NodePath("../..")

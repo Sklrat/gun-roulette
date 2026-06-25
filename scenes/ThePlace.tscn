@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=21 format=3 uid="uid://banu1sca1sxkv"]
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="2_md85l"]
@@ -8,6 +8,18 @@
 [ext_resource type="Script" uid="uid://cnatx3rkqh24b" path="res://scripts/game_over.gd" id="5_us23g"]
 [ext_resource type="Resource" uid="uid://bbqhr7itx5f8n" path="res://rounds/round_4.tres" id="6_6go3t"]
 [ext_resource type="Resource" uid="uid://dxokfedvbavv8" path="res://rounds/round_5.tres" id="7_6go3t"]
+[ext_resource type="PackedScene" uid="uid://bnjx4clv3gs8r" path="res://cards/buttons/2x_damage.tscn" id="8_3m8qh"]
+[ext_resource type="PackedScene" uid="uid://b73dyx8y5kkk3" path="res://cards/buttons/no_damage.tscn" id="9_wkbtd"]
+[ext_resource type="PackedScene" uid="uid://blx7knm74t0fw" path="res://cards/buttons/rotate_25l.tscn" id="10_t778w"]
+[ext_resource type="PackedScene" uid="uid://bwkbymqpaal5j" path="res://cards/buttons/rotate_25r.tscn" id="11_e8ja6"]
+[ext_resource type="PackedScene" uid="uid://t5i6cc4aenl0" path="res://cards/buttons/rotate_45l.tscn" id="12_w35uy"]
+[ext_resource type="PackedScene" uid="uid://bpr0bthwan2e5" path="res://cards/buttons/rotate_45r.tscn" id="13_ihgyo"]
+[ext_resource type="PackedScene" uid="uid://nmljvubi2cb5" path="res://cards/buttons/rotate_90l.tscn" id="14_ndb8o"]
+[ext_resource type="PackedScene" uid="uid://ic7dy5t0yt77" path="res://cards/buttons/rotate_90r.tscn" id="15_cupkn"]
+[ext_resource type="PackedScene" uid="uid://cmld8x0hbpth1" path="res://cards/buttons/rotate_180.tscn" id="16_eexbl"]
+[ext_resource type="PackedScene" uid="uid://deexkd3njnfty" path="res://cards/buttons/slow.tscn" id="17_b7gyl"]
+[ext_resource type="PackedScene" uid="uid://gulu0ct6oqnc" path="res://cards/buttons/stop.tscn" id="18_a84lc"]
+[ext_resource type="PackedScene" uid="uid://bcv3q1t7bqcj5" path="res://scenes/full_screen_button.tscn" id="19_wkbtd"]
 
 [node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "fire_button", "game_canvas", "game_over_canvas")]
 script = ExtResource("1_md85l")
@@ -19,6 +31,9 @@ fire_button = NodePath("GameCanvasLayer/FireButton")
 game_canvas = NodePath("GameCanvasLayer")
 game_over_canvas = NodePath("GameOverCanvasLayer")
 rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("4_tppfv"), ExtResource("5_2ua7v"), ExtResource("6_6go3t"), ExtResource("7_6go3t")])
+card_scenes = Array[PackedScene]([ExtResource("8_3m8qh"), ExtResource("9_wkbtd"), ExtResource("10_t778w"), ExtResource("11_e8ja6"), ExtResource("12_w35uy"), ExtResource("13_ihgyo"), ExtResource("14_ndb8o"), ExtResource("15_cupkn"), ExtResource("16_eexbl"), ExtResource("17_b7gyl"), ExtResource("18_a84lc")])
+rotation_card_scenes = Array[PackedScene]([ExtResource("10_t778w"), ExtResource("11_e8ja6"), ExtResource("12_w35uy"), ExtResource("13_ihgyo"), ExtResource("14_ndb8o"), ExtResource("15_cupkn"), ExtResource("16_eexbl")])
+radius = 250.0
 countdown_length = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -26,10 +41,10 @@ zoom = Vector2(0.72, 0.72)
 
 [node name="spin" type="Button" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = -48.0
-offset_top = -142.0
-offset_right = 49.0
-offset_bottom = -42.0
+offset_left = -65.0
+offset_top = -159.52576
+offset_right = 66.0
+offset_bottom = -24.474228
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_color = Color(0, 0, 0, 0)
 theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 0)
@@ -101,6 +116,12 @@ offset_top = 123.0
 offset_right = 1123.0
 offset_bottom = 184.0
 text = "Fire!"
+
+[node name="CheckButton" parent="GameCanvasLayer" instance=ExtResource("19_wkbtd")]
+offset_left = 1021.0
+offset_top = 614.0
+offset_right = 1148.0
+offset_bottom = 646.0
 
 [node name="GameOverCanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_over_text", "rounds_text", "enemys_text", "guns_text", "cards_text", "menu_button")]
 visible = false

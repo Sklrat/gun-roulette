@@ -2,15 +2,14 @@ extends Node2D
 
 @export var collision_shape: CollisionShape2D
 @export var animation_player: AnimationPlayer
-@export var line2D : Line2D
 
 var main_scene
 
 var damage: int = 1
 
-var acceleration: float = 0.2
+@export var max_speed: float = 10
+@export var acceleration: float = 0.2
 var speed: float = 0
-var max_speed: float = 10
 
 var spinning: bool = false
 var stop_spinning: bool = false
@@ -64,7 +63,6 @@ func start_countdown(delta:float) -> void:
 	#ight now this function shoots > deswpans, and spwans a new gun
 func shoot() -> void:
 	main_scene.game_state = "shooting"
-	line2D.visible = false
 	animation_player.play("shoot")
 	await animation_player.animation_finished
 	main_scene.guns_shot += 1
