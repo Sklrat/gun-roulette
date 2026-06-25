@@ -56,3 +56,5 @@ text = "Play"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = SubResource("NoiseTexture2D_ow34m")
+
+[connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_play_button_pressed"]

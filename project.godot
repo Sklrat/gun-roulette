@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gun roulette"
-run/main_scene="uid://banu1sca1sxkv"
+run/main_scene="uid://bfi38g1oau5oh"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
 

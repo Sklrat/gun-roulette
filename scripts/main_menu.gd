@@ -14,10 +14,8 @@ func _process(delta: float) -> void:
 	var sampled_noise = noise.noise.get_noise_1d(time_passed)
 	sampled_noise = abs(sampled_noise) * 2
 	lighted_image.self_modulate.a = sampled_noise
-	print(sampled_noise)
-	#time_till -= delta
-	#if time_till:
-		#light_intensity = randf_range(min_light,max_light)
-		#lighted_image.self_modulate.a = light_intensity
-		#time_till = 0.4
 	
+
+
+func _on_play_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/ThePlace.tscn")

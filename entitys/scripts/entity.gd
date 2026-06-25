@@ -27,7 +27,6 @@ func loose_lives(amount: int) -> void:
 			return
 			
 func die() -> void:
-	main_scene.enemys_left -= 1
 	if animation_player != null:
 		animation_player.play("die")
 		await animation_player.animation_finished

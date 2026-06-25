@@ -6,6 +6,7 @@ extends Node2D
 @export var countdown_text: Label
 @export var round_text: Label
 @export var enemys_left_text: Label
+@export var fire_button: Button
 @export var game_canvas: CanvasLayer
 @export var game_over_canvas: CanvasLayer
 @export var rounds: Array[RoundData] = []
@@ -35,6 +36,7 @@ var min_distance: float  = 200
 var center = Vector2(0, -100)
 var radius: float = 200
 
+@export var countdown_length: float = 5
 var countdown_timer: float = 0
 
 signal state_changed(game_state)
@@ -49,6 +51,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if game_state == "counting_down":
 		countdown(delta)
+		fire_button.disabled = false
+		fire_button.self_modulate.a = 1
+	else:
+		fire_button.disabled = true
+		fire_button.self_modulate.a = 0
 		
 func start_round() -> void:
 	if round - 1 >= rounds.size():
@@ -171,7 +178,7 @@ func _on_enemy_died() -> void:
 		start_round()
 	
 func start_countdown() -> void:
-	countdown_timer = 5
+	countdown_timer = countdown_length
 	game_state = "counting_down"
 	gun.line2D.visible = true
 	
@@ -203,3 +210,7 @@ func _on_card_pressed (action: String, amount: float) -> void:
 
 func _on_spin_pressed() -> void:
 	gun._on_spin_pressed()
+
+
+func _on_fire_button_pressed() -> void:
+	countdown_timer = 0

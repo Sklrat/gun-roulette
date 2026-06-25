@@ -98,6 +98,8 @@ _data = {
 [node name="Troll" type="Node2D" groups=["enimies"]]
 script = ExtResource("1_tbwtc")
 timer = 10.0
+lives = 2
+is_enemy = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tbwtc")

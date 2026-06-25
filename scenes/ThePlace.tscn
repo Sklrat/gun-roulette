@@ -9,15 +9,17 @@
 [ext_resource type="Resource" uid="uid://bbqhr7itx5f8n" path="res://rounds/round_4.tres" id="6_6go3t"]
 [ext_resource type="Resource" uid="uid://dxokfedvbavv8" path="res://rounds/round_5.tres" id="7_6go3t"]
 
-[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "game_canvas", "game_over_canvas")]
+[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "fire_button", "game_canvas", "game_over_canvas")]
 script = ExtResource("1_md85l")
 card_hbox = NodePath("GameCanvasLayer/MarginContainer/HBoxContainer")
 countdown_text = NodePath("GameCanvasLayer/CountDown")
 round_text = NodePath("GameCanvasLayer/Round")
 enemys_left_text = NodePath("GameCanvasLayer/Enemys")
+fire_button = NodePath("GameCanvasLayer/FireButton")
 game_canvas = NodePath("GameCanvasLayer")
 game_over_canvas = NodePath("GameOverCanvasLayer")
 rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("4_tppfv"), ExtResource("5_2ua7v"), ExtResource("6_6go3t"), ExtResource("7_6go3t")])
+countdown_length = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
@@ -93,6 +95,13 @@ offset_bottom = 164.0
 theme_override_font_sizes/font_size = 28
 text = "Enemys left: "
 
+[node name="FireButton" type="Button" parent="GameCanvasLayer"]
+offset_left = 1013.0
+offset_top = 123.0
+offset_right = 1123.0
+offset_bottom = 184.0
+text = "Fire!"
+
 [node name="GameOverCanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_over_text", "rounds_text", "enemys_text", "guns_text", "cards_text", "menu_button")]
 visible = false
 script = ExtResource("5_us23g")
@@ -101,7 +110,7 @@ rounds_text = NodePath("MarginContainer/VBoxContainer/Round")
 enemys_text = NodePath("MarginContainer/VBoxContainer/EnemysKilled")
 guns_text = NodePath("MarginContainer/VBoxContainer/GunsShot")
 cards_text = NodePath("MarginContainer/VBoxContainer/CardsPlayed")
-menu_button = NodePath("MarginContainer/VBoxContainer/Button")
+menu_button = NodePath("MarginContainer/VBoxContainer/MainMenuButton")
 
 [node name="ColorRect" type="ColorRect" parent="GameOverCanvasLayer"]
 offset_right = 1154.0
@@ -147,8 +156,10 @@ text = "Guns shot: "
 layout_mode = 2
 text = "Cards Played:"
 
-[node name="Button" type="Button" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
 
 [connection signal="pressed" from="spin" to="." method="_on_spin_pressed"]
+[connection signal="pressed" from="GameCanvasLayer/FireButton" to="." method="_on_fire_button_pressed"]
+[connection signal="pressed" from="GameOverCanvasLayer/MarginContainer/VBoxContainer/MainMenuButton" to="GameOverCanvasLayer" method="_on_main_menu_button_pressed"]

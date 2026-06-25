@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bnmtrav2vvbv3"]
 
 [ext_resource type="Script" uid="uid://cou3n3xaddcw8" path="res://guns/pistol.gd" id="1_4vo22"]
-[ext_resource type="Texture2D" uid="uid://bjbkpjyxjrhf" path="res://sprites/pistol.png" id="1_x8b8f"]
+[ext_resource type="Texture2D" uid="uid://d0hvvjytvjkkg" path="res://sprites/guns/pistol.png" id="2_juem0"]
 [ext_resource type="Texture2D" uid="uid://ch5r2j7y5b8dd" path="res://sprites/bang.png" id="3_gi72s"]
 [ext_resource type="AudioStream" uid="uid://b1s05jcjym35f" path="res://sfx/gunshot.mp3" id="4_7qm2q"]
 [ext_resource type="AudioStream" uid="uid://cjs17mcntd70u" path="res://sfx/despawn.mp3" id="5_juem0"]
@@ -70,7 +70,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0.245, 0.245)]
+"values": [Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -133,7 +133,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.16666667, 0.6),
 "transitions": PackedFloat32Array(0.57434916, 4.1410604, 1),
 "update": 0,
-"values": [Vector2(0.245, 0.245), Vector2(0.42, 0.36), Vector2(0, 0)]
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -259,7 +259,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.033333335, 0.5, 0.6666667, 0.8333333),
 "transitions": PackedFloat32Array(1, 3.482203, 2.0705302, 1),
 "update": 0,
-"values": [Vector2(0.245, 0.245), Vector2(0.17, 0.635), Vector2(0.425, 0.2), Vector2(0.245, 0.245)]
+"values": [Vector2(1, 1), Vector2(0.475, 2.26), Vector2(1.255, 0.62), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -322,13 +322,12 @@ default_color = Color(0, 0, 0, 1)
 
 [node name="Gun" type="Sprite2D" parent="."]
 position = Vector2(18.950005, 13.5)
-scale = Vector2(0.245, 0.245)
-texture = ExtResource("1_x8b8f")
+texture = ExtResource("2_juem0")
+offset = Vector2(26.645, 2.24)
 
 [node name="Bang" type="Sprite2D" parent="Gun"]
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(257.34692, -55.10204)
-scale = Vector2(2.4234693, 2.4234693)
+position = Vector2(75.5191, -15.759233)
 texture = ExtResource("3_gi72s")
 
 [node name="Area2D" type="Area2D" parent="."]
