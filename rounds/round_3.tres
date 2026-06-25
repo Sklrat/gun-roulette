@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoundData" load_steps=4 format=3 uid="uid://cx07c2336obbg"]
+
+[ext_resource type="PackedScene" uid="uid://xnh1rg677ciy" path="res://entitys/the_big_boi.tscn" id="1_4ri7y"]
+[ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="1_sxubk"]
+[ext_resource type="PackedScene" uid="uid://bkt2lttw7wnu6" path="res://entitys/hostage.tscn" id="2_416i1"]
+
+[resource]
+script = ExtResource("1_sxubk")
+entitys_to_spawn = Array[PackedScene]([ExtResource("1_4ri7y"), ExtResource("2_416i1")])
+metadata/_custom_type_script = "uid://d1mb5fl8tk8oe"

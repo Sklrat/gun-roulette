@@ -6,6 +6,8 @@ extends Node2D
 @export var countdown_text: Label
 @export var round_text: Label
 @export var enemys_left_text: Label
+@export var game_canvas: CanvasLayer
+@export var game_over_canvas: CanvasLayer
 @export var rounds: Array[RoundData] = []
 var card_folder = "res://cards/buttons/"
 var card_files: Array[String] = []
@@ -17,7 +19,8 @@ var player_lives: int = 3
 
 var round: int = 1
 var enemys_killed: int = 0
-var guns_fired: int = 0
+var guns_shot: int = 0
+var cards_played: int = 0
 
 var missed_in_row: int = 0
 var game_state: String = "idle": 
@@ -42,19 +45,17 @@ func _ready() -> void:
 	spawn_gun()
 	start_round()
 	give_random_card(5)
-	var test: Array = ["a", "b", "c"]
-	for i in test:
-		print(i)
-		test.pop_back()
-		print(i)
-	print(test)
 
 func _process(delta: float) -> void:
 	if game_state == "counting_down":
 		countdown(delta)
 		
 func start_round() -> void:
-	print("round:" + str(round))
+	if round - 1 >= rounds.size():
+		round -= 1
+		game_canvas.visible = false
+		game_over_canvas.prepare_screen(true)
+		return
 	var current_round_data = rounds[round - 1]
 	#clear the scene
 	for entity in entitys:
@@ -136,6 +137,13 @@ func give_random_rotation_card() -> void:
 	card.card_pressed.connect(_on_card_pressed)
 	card_hbox.add_child(card)
 		
+func remove_random_card(amount: int) -> void:
+	for i in amount:
+		if card_hbox.get_child_count() > 0:
+			var random_card = card_hbox.get_children().pick_random()
+			random_card.queue_free()
+		
+		
 func load_cards() -> void:
 	var card_dir = DirAccess.open(card_folder)
 	
@@ -152,6 +160,8 @@ func load_cards() -> void:
 		
 func _on_player_damaged(amount: int) -> void:
 	player_lives -= amount
+	if player_lives <= 0:
+		game_over_canvas.prepare_screen(false)
 	
 func _on_enemy_died() -> void:
 	enemys_left -= 1

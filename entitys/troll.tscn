@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bbtn25bgeq3gs"]
 
-[ext_resource type="Script" uid="uid://bdw4v0x7a6rjp" path="res://entitys/scripts/entity.gd" id="1_tbwtc"]
+[ext_resource type="Script" uid="uid://dtxgh14wx7vwt" path="res://entitys/scripts/troll.gd" id="1_tbwtc"]
 [ext_resource type="Texture2D" uid="uid://bf47u0als74rq" path="res://sprites/entitys/troll.png" id="2_tbwtc"]
 [ext_resource type="AudioStream" uid="uid://5jjchfrv23qh" path="res://sfx/disappear.mp3" id="3_iolao"]
 
@@ -95,10 +95,9 @@ _data = {
 &"spawn": SubResource("Animation_wvd63")
 }
 
-[node name="Hostage" type="Node2D" node_paths=PackedStringArray("animation_player") groups=["enimies"]]
+[node name="Troll" type="Node2D" groups=["enimies"]]
 script = ExtResource("1_tbwtc")
-animation_player = NodePath("AnimationPlayer")
-lives = 1
+timer = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_tbwtc")

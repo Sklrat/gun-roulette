@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkt2lttw7wnu6"]
+[gd_scene load_steps=9 format=3 uid="uid://citwf8wl6e424"]
 
-[ext_resource type="Script" uid="uid://c1st1v7xav7mn" path="res://entitys/scripts/hostage.gd" id="1_ck1xf"]
-[ext_resource type="Texture2D" uid="uid://dsjexelcwpvot" path="res://sprites/entitys/hostage.png" id="2_ck1xf"]
-[ext_resource type="AudioStream" uid="uid://5jjchfrv23qh" path="res://sfx/disappear.mp3" id="3_ild06"]
+[ext_resource type="Script" uid="uid://b2yvce6d6bv5o" path="res://entitys/scripts/2_card.gd" id="1_gukt0"]
+[ext_resource type="Texture2D" uid="uid://bc4tdyee7g30h" path="res://sprites/cards-resized/p2card.png" id="2_gukt0"]
+[ext_resource type="AudioStream" uid="uid://5jjchfrv23qh" path="res://sfx/disappear.mp3" id="3_u8i1g"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qaasr"]
-radius = 55.145264
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gukt0"]
+size = Vector2(86, 120)
 
 [sub_resource type="Animation" id="Animation_jqv6w"]
 length = 0.001
@@ -24,14 +24,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/1/path = NodePath("Sprite2D:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -95,18 +95,17 @@ _data = {
 &"spawn": SubResource("Animation_wvd63")
 }
 
-[node name="Hostage" type="Node2D" node_paths=PackedStringArray("animation_player")]
-script = ExtResource("1_ck1xf")
-animation_player = NodePath("AnimationPlayer")
+[node name="2Card" type="Node2D"]
+script = ExtResource("1_gukt0")
 lives = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ck1xf")
+texture = ExtResource("2_gukt0")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_qaasr")
+shape = SubResource("RectangleShape2D_gukt0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -114,4 +113,4 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_ild06")
+stream = ExtResource("3_u8i1g")

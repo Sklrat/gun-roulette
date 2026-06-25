@@ -24,6 +24,7 @@ func _ready() -> void:
 	
 
 func destory_card() -> void:
+	main_scene.cards_played += 1
 	self.queue_free()
 	
 

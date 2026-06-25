@@ -24,14 +24,17 @@ func loose_lives(amount: int) -> void:
 		
 		if lives <= 0:
 			die()
+			return
 			
 func die() -> void:
 	main_scene.enemys_left -= 1
 	if animation_player != null:
 		animation_player.play("die")
 		await animation_player.animation_finished
+	main_scene.entitys.erase(self)
 	self.queue_free()
 	if is_enemy:
+		main_scene.enemys_killed += 1
 		enemy_died.emit()
 	
 signal enemy_died()

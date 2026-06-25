@@ -1,17 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=9 format=3 uid="uid://banu1sca1sxkv"]
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="2_md85l"]
 [ext_resource type="Resource" uid="uid://bo4h52hv8qxrk" path="res://rounds/round_1.tres" id="3_tppfv"]
 [ext_resource type="Resource" uid="uid://b5vqyeeytifax" path="res://rounds/round_2.tres" id="4_tppfv"]
+[ext_resource type="Resource" uid="uid://cx07c2336obbg" path="res://rounds/round_3.tres" id="5_2ua7v"]
+[ext_resource type="Script" uid="uid://cnatx3rkqh24b" path="res://scripts/game_over.gd" id="5_us23g"]
+[ext_resource type="Resource" uid="uid://bbqhr7itx5f8n" path="res://rounds/round_4.tres" id="6_6go3t"]
+[ext_resource type="Resource" uid="uid://dxokfedvbavv8" path="res://rounds/round_5.tres" id="7_6go3t"]
 
-[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text")]
+[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "game_canvas", "game_over_canvas")]
 script = ExtResource("1_md85l")
-card_hbox = NodePath("CanvasLayer/MarginContainer/HBoxContainer")
-countdown_text = NodePath("CanvasLayer/CountDown")
-round_text = NodePath("CanvasLayer/Round")
-enemys_left_text = NodePath("CanvasLayer/Enemys")
-rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("4_tppfv"), ExtResource("3_tppfv")])
+card_hbox = NodePath("GameCanvasLayer/MarginContainer/HBoxContainer")
+countdown_text = NodePath("GameCanvasLayer/CountDown")
+round_text = NodePath("GameCanvasLayer/Round")
+enemys_left_text = NodePath("GameCanvasLayer/Enemys")
+game_canvas = NodePath("GameCanvasLayer")
+game_over_canvas = NodePath("GameOverCanvasLayer")
+rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("4_tppfv"), ExtResource("5_2ua7v"), ExtResource("6_6go3t"), ExtResource("7_6go3t")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
@@ -37,9 +43,9 @@ theme_override_colors/icon_hover_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0)
 theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GameCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="GameCanvasLayer"]
 custom_minimum_size = Vector2(100, 0)
 anchors_preset = 7
 anchor_left = 0.5
@@ -53,13 +59,13 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameCanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 20
 
-[node name="CountDown" type="Label" parent="CanvasLayer"]
+[node name="CountDown" type="Label" parent="GameCanvasLayer"]
 offset_left = 1028.0
 offset_top = 26.0
 offset_right = 1106.0
@@ -70,7 +76,7 @@ text = "0.0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Round" type="Label" parent="CanvasLayer"]
+[node name="Round" type="Label" parent="GameCanvasLayer"]
 offset_left = 44.0
 offset_top = 26.0
 offset_right = 257.0
@@ -79,7 +85,7 @@ theme_override_font_sizes/font_size = 50
 text = "Round: 1"
 vertical_alignment = 1
 
-[node name="Enemys" type="Label" parent="CanvasLayer"]
+[node name="Enemys" type="Label" parent="GameCanvasLayer"]
 offset_left = 45.0
 offset_top = 129.0
 offset_right = 194.0
@@ -87,6 +93,62 @@ offset_bottom = 164.0
 theme_override_font_sizes/font_size = 28
 text = "Enemys left: "
 
-[node name="GameOverCanvasLayer" type="CanvasLayer" parent="."]
+[node name="GameOverCanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("game_over_text", "rounds_text", "enemys_text", "guns_text", "cards_text", "menu_button")]
+visible = false
+script = ExtResource("5_us23g")
+game_over_text = NodePath("MarginContainer/VBoxContainer/GameOver")
+rounds_text = NodePath("MarginContainer/VBoxContainer/Round")
+enemys_text = NodePath("MarginContainer/VBoxContainer/EnemysKilled")
+guns_text = NodePath("MarginContainer/VBoxContainer/GunsShot")
+cards_text = NodePath("MarginContainer/VBoxContainer/CardsPlayed")
+menu_button = NodePath("MarginContainer/VBoxContainer/Button")
+
+[node name="ColorRect" type="ColorRect" parent="GameOverCanvasLayer"]
+offset_right = 1154.0
+offset_bottom = 650.0
+color = Color(0.66, 0.23100002, 0.23100002, 0.52156866)
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverCanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -203.0
+offset_right = 207.0
+offset_bottom = 203.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverCanvasLayer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="GameOver" type="Label" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="Round" type="Label" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Round:"
+
+[node name="EnemysKilled" type="Label" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enemys killed:"
+
+[node name="GunsShot" type="Label" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Guns shot: "
+
+[node name="CardsPlayed" type="Label" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Cards Played:"
+
+[node name="Button" type="Button" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
 
 [connection signal="pressed" from="spin" to="." method="_on_spin_pressed"]

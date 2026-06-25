@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="RoundData" load_steps=3 format=3 uid="uid://b5vqyeeytifax"]
+[gd_resource type="Resource" script_class="RoundData" load_steps=5 format=3 uid="uid://b5vqyeeytifax"]
 
 [ext_resource type="PackedScene" uid="uid://bxodmmo626fmb" path="res://entitys/enemy1h.tscn" id="1_io02a"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="1_tc8au"]
+[ext_resource type="PackedScene" uid="uid://citwf8wl6e424" path="res://entitys/2card.tscn" id="2_uhiec"]
+[ext_resource type="PackedScene" uid="uid://bdumeccea537" path="res://entitys/enemy2h.tscn" id="3_7usvn"]
 
 [resource]
 script = ExtResource("1_tc8au")
-entitys_to_spawn = Array[PackedScene]([ExtResource("1_io02a")])
+entitys_to_spawn = Array[PackedScene]([ExtResource("1_io02a"), ExtResource("2_uhiec"), ExtResource("3_7usvn")])
 metadata/_custom_type_script = "uid://d1mb5fl8tk8oe"

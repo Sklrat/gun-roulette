@@ -67,6 +67,7 @@ func shoot() -> void:
 	line2D.visible = false
 	animation_player.play("shoot")
 	await animation_player.animation_finished
+	main_scene.guns_shot += 1
 	await get_tree().create_timer(1.0).timeout
 	
 	

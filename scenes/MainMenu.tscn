@@ -42,7 +42,7 @@ offset_right = 815.0
 offset_bottom = 228.0
 theme_override_fonts/font = ExtResource("4_ow34m")
 theme_override_font_sizes/font_size = 80
-text = "Spinny Gun Game"
+text = "The Spinny Gun"
 horizontal_alignment = 1
 vertical_alignment = 1
 
