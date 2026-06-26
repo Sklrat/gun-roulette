@@ -44,7 +44,7 @@ countdown_length = 10.0
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
 
-[node name="spin" type="Button" parent="."]
+[node name="spin" type="Button" parent="." groups=["silent_button"]]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -65.0
 offset_top = -159.52576

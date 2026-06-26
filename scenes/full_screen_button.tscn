@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bcv3q1t7bqcj5"]
 
-[ext_resource type="Script" uid="uid://d0u3r4s0sryp3" path="res://check_button.gd" id="1_afyj6"]
+[ext_resource type="Script" uid="uid://d0u3r4s0sryp3" path="res://scripts/check_button.gd" id="1_afyj6"]
 
 [node name="CheckButton" type="CheckButton"]
 offset_right = 44.0
