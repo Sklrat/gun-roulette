@@ -1,8 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=25 format=3 uid="uid://banu1sca1sxkv"]
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="2_md85l"]
+[ext_resource type="PackedScene" uid="uid://bnmtrav2vvbv3" path="res://guns/Pistol.tscn" id="2_w35uy"]
+[ext_resource type="PackedScene" uid="uid://b61vmydv38jas" path="res://guns/shot_gun.tscn" id="3_ihgyo"]
 [ext_resource type="Resource" uid="uid://bo4h52hv8qxrk" path="res://rounds/round_1.tres" id="3_tppfv"]
+[ext_resource type="PackedScene" uid="uid://c6fkm7my1pq7m" path="res://guns/sniper_rifle.tscn" id="4_ndb8o"]
 [ext_resource type="Resource" uid="uid://b5vqyeeytifax" path="res://rounds/round_2.tres" id="4_tppfv"]
 [ext_resource type="Resource" uid="uid://cx07c2336obbg" path="res://rounds/round_3.tres" id="5_2ua7v"]
 [ext_resource type="Script" uid="uid://cnatx3rkqh24b" path="res://scripts/game_over.gd" id="5_us23g"]
@@ -20,9 +23,11 @@
 [ext_resource type="PackedScene" uid="uid://deexkd3njnfty" path="res://cards/buttons/slow.tscn" id="17_b7gyl"]
 [ext_resource type="PackedScene" uid="uid://gulu0ct6oqnc" path="res://cards/buttons/stop.tscn" id="18_a84lc"]
 [ext_resource type="PackedScene" uid="uid://bcv3q1t7bqcj5" path="res://scenes/full_screen_button.tscn" id="19_wkbtd"]
+[ext_resource type="Texture2D" uid="uid://ge2dejqbhf5b" path="res://sprites/Screenshot 2026-06-25 175807.png" id="21_t778w"]
 
 [node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "fire_button", "game_canvas", "game_over_canvas")]
 script = ExtResource("1_md85l")
+guns = Array[PackedScene]([ExtResource("2_w35uy"), ExtResource("3_ihgyo"), ExtResource("4_ndb8o")])
 card_hbox = NodePath("GameCanvasLayer/MarginContainer/HBoxContainer")
 countdown_text = NodePath("GameCanvasLayer/CountDown")
 round_text = NodePath("GameCanvasLayer/Round")
@@ -180,6 +185,11 @@ text = "Cards Played:"
 [node name="MainMenuButton" type="Button" parent="GameOverCanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
+
+[node name="Screenshot20260625175807" type="Sprite2D" parent="."]
+position = Vector2(27.999998, 58.000004)
+scale = Vector2(2.4509122, 1.9601016)
+texture = ExtResource("21_t778w")
 
 [connection signal="pressed" from="spin" to="." method="_on_spin_pressed"]
 [connection signal="pressed" from="GameCanvasLayer/FireButton" to="." method="_on_fire_button_pressed"]

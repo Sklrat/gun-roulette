@@ -2,6 +2,7 @@ extends Node2D
 
 @export var gun_scene = preload("res://guns/shot_gun.tscn")
 @export var player_scene = preload("res://entitys/player.tscn")
+@export var guns: Array[PackedScene] = []
 @export var card_hbox: HBoxContainer
 @export var countdown_text: Label
 @export var round_text: Label
@@ -103,7 +104,8 @@ func spawn_player() -> void:
 		player.player_damaged.connect(_on_player_damaged)
 			
 func spawn_gun() -> void:
-	gun = gun_scene.instantiate()
+	var gun_choosen = guns.pick_random()
+	gun = gun_choosen.instantiate()
 	gun.global_position = center
 	add_child(gun)
 	var gun_animation_player = gun.find_child("AnimationPlayer")

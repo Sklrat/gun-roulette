@@ -80,7 +80,6 @@ func shoot() -> void:
 		
 	main_scene.spawn_gun()
 	#collision_shape.disabled = false
-	
 
 var rotation_progress = 0
 var rotation_speed = 2
