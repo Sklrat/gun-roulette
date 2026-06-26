@@ -3,4 +3,4 @@ extends Entity
 
 func die() -> void:
 	super()
-	main_scene.remove_random_card(2)
+	main_scene.subtract_bullets(1)

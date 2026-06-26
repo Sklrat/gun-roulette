@@ -68,10 +68,15 @@ func shoot() -> void:
 	main_scene.guns_shot += 1
 	await get_tree().create_timer(1.0).timeout
 	
+	main_scene.subtract_bullets(damage)
 	
 	animation_player.play("despawn")
 	await animation_player.animation_finished
 	self.queue_free()
+	
+	if main_scene.bullets_left <= 0:
+		main_scene.game_over_canvas.prepare_screen(false)
+		return
 	
 	main_scene.missed_in_row += 1
 	if main_scene.missed_in_row >= 3:

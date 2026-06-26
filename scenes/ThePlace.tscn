@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://banu1sca1sxkv"]
+[gd_scene load_steps=26 format=3 uid="uid://banu1sca1sxkv"]
 
 [ext_resource type="Script" uid="uid://d2lf6c1ggr2kr" path="res://scripts/game_manager.gd" id="1_md85l"]
 [ext_resource type="Script" uid="uid://d1mb5fl8tk8oe" path="res://scripts/round_data.gd" id="2_md85l"]
@@ -24,19 +24,21 @@
 [ext_resource type="PackedScene" uid="uid://gulu0ct6oqnc" path="res://cards/buttons/stop.tscn" id="18_a84lc"]
 [ext_resource type="PackedScene" uid="uid://bcv3q1t7bqcj5" path="res://scenes/full_screen_button.tscn" id="19_wkbtd"]
 [ext_resource type="Texture2D" uid="uid://ge2dejqbhf5b" path="res://sprites/Screenshot 2026-06-25 175807.png" id="21_t778w"]
+[ext_resource type="PackedScene" uid="uid://w37wjv2juepg" path="res://cards/buttons/reload.tscn" id="22_ndb8o"]
 
-[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "fire_button", "game_canvas", "game_over_canvas")]
+[node name="ThePlace" type="Node2D" node_paths=PackedStringArray("card_hbox", "countdown_text", "round_text", "enemys_left_text", "bullets_left_text", "fire_button", "game_canvas", "game_over_canvas")]
 script = ExtResource("1_md85l")
 guns = Array[PackedScene]([ExtResource("2_w35uy"), ExtResource("3_ihgyo"), ExtResource("4_ndb8o")])
 card_hbox = NodePath("GameCanvasLayer/MarginContainer/HBoxContainer")
 countdown_text = NodePath("GameCanvasLayer/CountDown")
 round_text = NodePath("GameCanvasLayer/Round")
 enemys_left_text = NodePath("GameCanvasLayer/Enemys")
+bullets_left_text = NodePath("GameCanvasLayer/Bullets")
 fire_button = NodePath("GameCanvasLayer/FireButton")
 game_canvas = NodePath("GameCanvasLayer")
 game_over_canvas = NodePath("GameOverCanvasLayer")
 rounds = Array[ExtResource("2_md85l")]([ExtResource("3_tppfv"), ExtResource("4_tppfv"), ExtResource("5_2ua7v"), ExtResource("6_6go3t"), ExtResource("7_6go3t")])
-card_scenes = Array[PackedScene]([ExtResource("8_3m8qh"), ExtResource("9_wkbtd"), ExtResource("10_t778w"), ExtResource("11_e8ja6"), ExtResource("12_w35uy"), ExtResource("13_ihgyo"), ExtResource("14_ndb8o"), ExtResource("15_cupkn"), ExtResource("16_eexbl"), ExtResource("17_b7gyl"), ExtResource("18_a84lc")])
+card_scenes = Array[PackedScene]([ExtResource("8_3m8qh"), ExtResource("9_wkbtd"), ExtResource("10_t778w"), ExtResource("11_e8ja6"), ExtResource("12_w35uy"), ExtResource("13_ihgyo"), ExtResource("14_ndb8o"), ExtResource("15_cupkn"), ExtResource("16_eexbl"), ExtResource("17_b7gyl"), ExtResource("18_a84lc"), ExtResource("22_ndb8o")])
 rotation_card_scenes = Array[PackedScene]([ExtResource("10_t778w"), ExtResource("11_e8ja6"), ExtResource("12_w35uy"), ExtResource("13_ihgyo"), ExtResource("14_ndb8o"), ExtResource("15_cupkn"), ExtResource("16_eexbl")])
 radius = 250.0
 countdown_length = 10.0
@@ -88,10 +90,10 @@ size_flags_vertical = 4
 theme_override_constants/separation = 20
 
 [node name="CountDown" type="Label" parent="GameCanvasLayer"]
-offset_left = 1028.0
-offset_top = 26.0
-offset_right = 1106.0
-offset_bottom = 167.0
+offset_left = 1000.0
+offset_top = 78.0
+offset_right = 1095.0
+offset_bottom = 201.0
 theme_override_font_sizes/font_size = 50
 text = "0.0
 "
@@ -115,11 +117,19 @@ offset_bottom = 164.0
 theme_override_font_sizes/font_size = 28
 text = "Enemys left: "
 
+[node name="Bullets" type="Label" parent="GameCanvasLayer"]
+offset_left = 986.0
+offset_top = 21.0
+offset_right = 1135.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 28
+text = "Bullets Left:"
+
 [node name="FireButton" type="Button" parent="GameCanvasLayer"]
-offset_left = 1013.0
-offset_top = 123.0
-offset_right = 1123.0
-offset_bottom = 184.0
+offset_left = 997.0
+offset_top = 166.0
+offset_right = 1107.0
+offset_bottom = 227.0
 text = "Fire!"
 
 [node name="CheckButton" parent="GameCanvasLayer" instance=ExtResource("19_wkbtd")]

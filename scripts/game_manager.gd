@@ -7,6 +7,7 @@ extends Node2D
 @export var countdown_text: Label
 @export var round_text: Label
 @export var enemys_left_text: Label
+@export var bullets_left_text: Label
 @export var fire_button: Button
 @export var game_canvas: CanvasLayer
 @export var game_over_canvas: CanvasLayer
@@ -18,10 +19,11 @@ var rotation_card_files: Array[String] = []
 @export var rotation_card_scenes: Array[PackedScene] = []
 var gun
 
-var player: Node2D
-var player_lives: int = 3
+#var player: Node2D
+#var player_lives: int = 3
 
 var round: int = 1
+var bullets_left: int = 0
 var enemys_killed: int = 0
 var guns_shot: int = 0
 var cards_played: int = 0
@@ -77,12 +79,14 @@ func start_round() -> void:
 	enemys_left = 0
 	entity_positions.clear()
 	#span player and entitys
-	spawn_player()
+	#spawn_player()
 	for entity in current_round_data.entitys_to_spawn:
 		var live_entity = spawn_entity(entity)
 		if live_entity.has_signal("enemy_died"):
 			live_entity.enemy_died.connect(_on_enemy_died)
 	give_random_card(3)
+	bullets_left = current_round_data.bullets
+	bullets_left_text.text = "Bullets Left: " + str(bullets_left)
 	round_text.text = "Round: " + str(round)
 	enemys_left_text.text = "Enemys left: " + str(enemys_left)
 		
@@ -95,13 +99,13 @@ func spawn_entity(entity_scene: PackedScene) -> Node2D:
 			enemys_left += 1
 		return entity
 			
-func spawn_player() -> void:
-		player = player_scene.instantiate()
-		player.lives = player_lives
-		player.global_position = get_spawn_point()
-		add_child(player)
-		entitys.append(player)
-		player.player_damaged.connect(_on_player_damaged)
+#func spawn_player() -> void:
+		#player = player_scene.instantiate()
+		#player.lives = player_lives
+		#player.global_position = get_spawn_point()
+		#add_child(player)
+		#entitys.append(player)
+		#player.player_damaged.connect(_on_player_damaged)
 			
 func spawn_gun() -> void:
 	var gun_choosen = guns.pick_random()
@@ -145,7 +149,7 @@ func give_random_rotation_card() -> void:
 	#var random_card = rotation_card_files[randi_range(0,rotation_card_files.size() - 1)]
 	#var full_path = card_folder + random_card
 	#var card_scene = load(str(full_path))
-	var card_scene = rotation_card_scenes[randi_range(0,card_scenes.size() - 1)]
+	var card_scene = rotation_card_scenes.pick_random()
 	var card = card_scene.instantiate()
 	card.card_pressed.connect(_on_card_pressed)
 	card_hbox.add_child(card)
@@ -171,10 +175,10 @@ func load_cards() -> void:
 		
 	card_dir.list_dir_end()
 		
-func _on_player_damaged(amount: int) -> void:
-	player_lives -= amount
-	if player_lives <= 0:
-		game_over_canvas.prepare_screen(false)
+#func _on_player_damaged(amount: int) -> void:
+	#player_lives -= amount
+	#if player_lives <= 0:
+		#game_over_canvas.prepare_screen(false)
 	
 func _on_enemy_died() -> void:
 	enemys_left -= 1
@@ -211,7 +215,14 @@ func _on_card_pressed (action: String, amount: float) -> void:
 		gun.stop_spinning = true
 		gun.speed = 0
 		start_countdown()
+	elif action == "reload":
+		bullets_left = 10
+		bullets_left_text.text = "Bullets Left: " + str(bullets_left)
 		
+		
+func subtract_bullets(amount: int) ->void:
+	bullets_left -= amount
+	bullets_left_text.text = "Bullets Left: " + str(bullets_left)
 
 
 func _on_spin_pressed() -> void:

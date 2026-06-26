@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://w37wjv2juepg"]
+
+[ext_resource type="Texture2D" uid="uid://cugbn1g614wi8" path="res://sprites/cards-resized/reload.png" id="1_8cr0t"]
+[ext_resource type="Script" uid="uid://c74lxjb2st52m" path="res://cards/card.gd" id="2_elrto"]
+
+[node name="Reload" type="TextureButton"]
+offset_right = 84.0
+offset_bottom = 118.0
+texture_normal = ExtResource("1_8cr0t")
+stretch_mode = 4
+script = ExtResource("2_elrto")
+action_type = "reload"
+active_states = Array[String](["all"])
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]
